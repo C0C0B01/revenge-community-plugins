@@ -1,0 +1,20 @@
+{
+	"format": 1,
+	"id": "dev.cocobo1.animated-keyboard",
+	"name": "Animated Keyboard",
+	"description": "Enables the built-in sliding animation on the keyboard for Android",
+	"author": "cocobo1 <767650984175992833> (https://cocobo1.dev \"Website\") (https://github.com/c0c0b01 \"GitHub\") (https://github.com/sponsors/c0c0b01 \"Donate\")",
+	"version": "1.0.0",
+	"icon": "KeyboardIcon",
+	"dependencies": {
+		"revenge.api": {
+			"version": ">=1 <2"
+		},
+		"discord": {
+			"version": "*"
+		}
+	},
+	"dist": {
+		"script": "index.js"
+	}
+}
