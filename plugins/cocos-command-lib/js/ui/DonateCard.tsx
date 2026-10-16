@@ -1,10 +1,10 @@
-import { SPONSORS_URL, GITHUB_URL, WEBSITE_URL, AVATAR_URL } from './constants'
-import { ReactNative } from "@revenge-mod/react"
 import { Design } from '@revenge-mod/discord/design'
+import { ReactNative } from '@revenge-mod/react'
+import { AVATAR_URL, GITHUB_URL, SPONSORS_URL, WEBSITE_URL } from './constants'
 
-const { Dimensions } = ReactNative;
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const AVATAR_SIZE = Math.min(80, Math.round(SCREEN_WIDTH * 0.15));
+const { Dimensions } = ReactNative
+const { width: SCREEN_WIDTH } = Dimensions.get('window')
+const AVATAR_SIZE = Math.min(80, Math.round(SCREEN_WIDTH * 0.15))
 
 const styles = {
 	background: {
@@ -26,8 +26,8 @@ const styles = {
 }
 
 export default function DonateCard() {
-	const { Stack, Card, Text, Button } = Design
-	const { Animated, Image, Linking, Pressable, View } = ReactNative
+	const { Card, Text, Button } = Design
+	const { Animated, Image, Linking, View } = ReactNative
 
 	return (
 		<Card
@@ -48,7 +48,9 @@ export default function DonateCard() {
 					},
 				]}
 			/>
-			<View style={{ flexDirection: 'row', padding: 16, alignItems: 'flex-start' }}>
+			<View
+				style={{ flexDirection: 'row', padding: 16, alignItems: 'flex-start' }}
+			>
 				<View style={{ flex: 1, marginRight: 16 }}>
 					<View style={{ marginBottom: 6 }}>
 						<Text variant="heading-lg/semibold" color="text-strong">
@@ -57,10 +59,18 @@ export default function DonateCard() {
 					</View>
 					<View style={{ marginBottom: 12 }}>
 						<Text variant="text-md/medium">
-							You can support the development of my plugins by sponsoring on GitHub!
+							You can support the development of my plugins by sponsoring on
+							GitHub!
 						</Text>
 					</View>
-					<View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+					<View
+						style={{
+							flexDirection: 'row',
+							flexWrap: 'wrap',
+							gap: 8,
+							alignItems: 'center',
+						}}
+					>
 						<Button
 							size="sm"
 							icon={revenge.assets.getAssetIdByName('HeartIcon')}
@@ -93,12 +103,9 @@ export default function DonateCard() {
 						borderRadius: AVATAR_SIZE / 2,
 					}}
 				>
-						<Image
-							source={{ uri: AVATAR_URL }}
-							style={styles.avatar}
-						/>
-					</Animated.View>
+					<Image source={{ uri: AVATAR_URL }} style={styles.avatar} />
+				</Animated.View>
 			</View>
 		</Card>
 	)
-};
+}

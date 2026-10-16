@@ -47,7 +47,9 @@ const isRow = (el: ReactElement<any>) =>
 	typeof (el.type as { type?: unknown })?.type === 'function'
 
 const isThread = (el: ReactElement<any>) =>
-	'threadId' in el.props && !('channel' in el.props) && typeof el.type === 'function'
+	'threadId' in el.props &&
+	!('channel' in el.props) &&
+	typeof el.type === 'function'
 
 const findRow = (node: ReactNode): ReactElement | undefined => {
 	if (Array.isArray(node)) return node.map(findRow).find(Boolean)
@@ -59,7 +61,10 @@ const swapThreads = (node: ReactNode): ReactNode => {
 	if (Array.isArray(node)) return node.map(swapThreads)
 	if (!isValidElement<{ children?: ReactNode }>(node)) return node
 	if (isThread(node))
-		return createElement(wrapThread(node.type as FC<any>), { key: node.key, ...node.props })
+		return createElement(wrapThread(node.type as FC<any>), {
+			key: node.key,
+			...node.props,
+		})
 	if (!node.props.children) return node
 
 	const children = swapThreads(node.props.children)
@@ -91,7 +96,10 @@ export default plugin({
 								rowPatched = true
 								cleanup(
 									instead(row.type as TextChannel, 'type', ([props], orig) =>
-										orig({ ...props, channel: props.channel && dashless(props.channel) }),
+										orig({
+											...props,
+											channel: props.channel && dashless(props.channel),
+										}),
 									),
 								)
 							}

@@ -1,23 +1,20 @@
 import { getStore } from '@revenge-mod/discord/flux'
+import { getModules } from '@revenge-mod/modules/finders'
 import { withProps } from '@revenge-mod/modules/finders/filters'
 import { after } from '@revenge-mod/patcher'
-import { getModules } from '@revenge-mod/modules/finders'
 
 const patches: (() => void)[] = []
 let multiAccountStore: object | undefined
-let multiAccounts;
+let multiAccounts: any
 
 export default plugin({
 	start() {
-		getModules(
-        withProps('getCanUseMultiAccountMobile'),
-        exports => {
-            multiAccounts = exports
-            patches.push(
-            	after(multiAccounts, 'getCanUseMultiAccountMobile', () => true),
-            )
-        },
-    )
+		getModules(withProps('getCanUseMultiAccountMobile'), exports => {
+			multiAccounts = exports
+			patches.push(
+				after(multiAccounts, 'getCanUseMultiAccountMobile', () => true),
+			)
+		})
 
 		getStore('MultiAccountStore', store => {
 			multiAccountStore = store
@@ -30,7 +27,8 @@ export default plugin({
 	stop() {
 		for (const unpatch of patches) unpatch()
 		if (multiAccountStore)
-			delete (multiAccountStore as Record<string, unknown>)
-				.canUseMultiAccountNotifications
+			(
+				multiAccountStore as Record<string, unknown>
+			).canUseMultiAccountNotifications = undefined
 	},
 })

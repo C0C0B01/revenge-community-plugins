@@ -1,25 +1,25 @@
-import * as types from "./types";
-import * as modules from "./modules"
-import * as commands from "./commands"
-import Settings from "./ui/Settings";
-import { patchCommands } from "./commands";
+import * as commands from './commands'
+import { patchCommands } from './commands'
+import * as modules from './modules'
+import * as types from './types'
+import Settings from './ui/Settings'
 
 const commandLib = {
-  types,
+	types,
 	modules,
-	commands
-};
+	commands,
+}
 
-(globalThis as any).commandlib = commandLib
+;(globalThis as any).commandlib = commandLib
 
 export default plugin({
-  start({ decorate }) {
-    patchCommands();
+	start({ decorate }) {
+		patchCommands()
 
-		decorate((plugin) => {
+		decorate(plugin => {
 			plugin.api.unscoped.commandlib = commandLib
 		})
-  },
+	},
 	SettingsComponent: Settings,
 })
 
